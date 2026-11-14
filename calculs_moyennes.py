@@ -2,12 +2,11 @@
 # Nombre de matières
 nombre_matieres = int(input("Combien de matières avez-vous ? "))
 
-# Création des listes
-matieres = []
-notes = []
-coefficients_ue1 = []
-coefficients_ue2 = []
-coefficients_ue3 = []
+# Création des dictionnaires
+notes = {}
+coefficients_ue1 = {}
+coefficients_ue2 = {}
+coefficients_ue3 = {}
 
 # Saisie des matières, notes et coefficients
 for i in range(nombre_matieres):
@@ -19,12 +18,11 @@ for i in range(nombre_matieres):
     coef2 = float(input("Coefficient UE2 : "))
     coef3 = float(input("Coefficient UE3 : "))
 
-    matieres.append(matiere)
-    notes.append(note)
-
-    coefficients_ue1.append(coef1)
-    coefficients_ue2.append(coef2)
-    coefficients_ue3.append(coef3)
+    # Ajout des informations dans les dictionnaires
+    notes[matiere] = note
+    coefficients_ue1[matiere] = coef1
+    coefficients_ue2[matiere] = coef2
+    coefficients_ue3[matiere] = coef3
 
 # Initialisation des sommes
 somme_ue1 = 0
@@ -36,16 +34,16 @@ total_coef_ue2 = 0
 total_coef_ue3 = 0
 
 # Calcul des moyennes
-for i in range(nombre_matieres):
+for matiere in notes:
 
-    somme_ue1 += notes[i] * coefficients_ue1[i]
-    total_coef_ue1 += coefficients_ue1[i]
+    somme_ue1 += notes[matiere] * coefficients_ue1[matiere]
+    total_coef_ue1 += coefficients_ue1[matiere]
 
-    somme_ue2 += notes[i] * coefficients_ue2[i]
-    total_coef_ue2 += coefficients_ue2[i]
+    somme_ue2 += notes[matiere] * coefficients_ue2[matiere]
+    total_coef_ue2 += coefficients_ue2[matiere]
 
-    somme_ue3 += notes[i] * coefficients_ue3[i]
-    total_coef_ue3 += coefficients_ue3[i]
+    somme_ue3 += notes[matiere] * coefficients_ue3[matiere]
+    total_coef_ue3 += coefficients_ue3[matiere]
 
 # Affichage des résultats
 if total_coef_ue1 > 0:
