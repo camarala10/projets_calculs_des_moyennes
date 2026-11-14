@@ -1,1 +1,1 @@
-la version 5 : pour la version 3 il faut saisir les notes et les coefficients au clavier mais cette fois ci avec tkinter
+la version 5 : pour la version 5 il faut saisir les notes et les coefficients au clavier mais cette fois ci avec tkinter
