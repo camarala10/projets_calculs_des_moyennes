@@ -2,47 +2,66 @@
 # Nombre de matières
 nombre_matieres = int(input("Combien de matières avez-vous ? "))
 
-# Initialisation des sommes pour UE1
-somme_notes_ue1 = 0
-somme_coef_ue1 = 0
-# Initialisation des sommes pour UE2
-somme_notes_ue2 = 0
-somme_coef_ue2 = 0
-# Initialisation des sommes pour UE3
-somme_notes_ue3 = 0
-somme_coef_ue3 = 0
-# Boucle de saisie
+# Création des listes
+matieres = []
+notes = []
+coefficients_ue1 = []
+coefficients_ue2 = []
+coefficients_ue3 = []
+
+# Saisie des matières, notes et coefficients
 for i in range(nombre_matieres):
 
-    nom_matiere = input("Nom de la matière : ")
+    matiere = input("Nom de la matière : ")
+    note = float(input("Moyenne : "))
 
-    note = float(input(f"Moyenne de {nom_matiere} : "))
-    coef1 = float(input(f"Coefficient UE1 de {nom_matiere} : "))
-    coef2 = float(input(f"Coefficient UE2 de {nom_matiere} : "))
-    coef3 = float(input(f"Coefficient UE3 de {nom_matiere} : "))
+    coef1 = float(input("Coefficient UE1 : "))
+    coef2 = float(input("Coefficient UE2 : "))
+    coef3 = float(input("Coefficient UE3 : "))
 
-    # Calcul UE1
-    somme_notes_ue1 += note * coef1
-    somme_coef_ue1 += coef1
+    matieres.append(matiere)
+    notes.append(note)
 
-    # Calcul UE2
-    somme_notes_ue2 += note * coef2
-    somme_coef_ue2 += coef2
+    coefficients_ue1.append(coef1)
+    coefficients_ue2.append(coef2)
+    coefficients_ue3.append(coef3)
 
-    # Calcul UE3
-    somme_notes_ue3 += note * coef3
-    somme_coef_ue3 += coef3
+# Initialisation des sommes
+somme_ue1 = 0
+somme_ue2 = 0
+somme_ue3 = 0
+
+total_coef_ue1 = 0
+total_coef_ue2 = 0
+total_coef_ue3 = 0
 
 # Calcul des moyennes
-if somme_coef_ue1 > 0 and somme_coef_ue2 > 0 and somme_coef_ue3 > 0:
+for i in range(nombre_matieres):
 
-    moyenne_ue1 = somme_notes_ue1 / somme_coef_ue1
-    moyenne_ue2 = somme_notes_ue2  / somme_coef_ue2
-    moyenne_ue3 = somme_notes_ue3   / somme_coef_ue3
+    somme_ue1 += notes[i] * coefficients_ue1[i]
+    total_coef_ue1 += coefficients_ue1[i]
 
+    somme_ue2 += notes[i] * coefficients_ue2[i]
+    total_coef_ue2 += coefficients_ue2[i]
+
+    somme_ue3 += notes[i] * coefficients_ue3[i]
+    total_coef_ue3 += coefficients_ue3[i]
+
+# Affichage des résultats
+if total_coef_ue1 > 0:
+    moyenne_ue1 = somme_ue1 / total_coef_ue1
     print("Moyenne UE1 :", round(moyenne_ue1, 2))
-    print("Moyenne UE2 :", round(moyenne_ue2, 2))
-    print("Moyenne UE3 :", round(moyenne_ue3, 2))
-
 else:
-    print("Erreur : un coefficient total est nul.")
+    print("Aucun coefficient pour UE1")
+
+if total_coef_ue2 > 0:
+    moyenne_ue2 = somme_ue2 / total_coef_ue2
+    print("Moyenne UE2 :", round(moyenne_ue2, 2))
+else:
+    print("Aucun coefficient pour UE2")
+
+if total_coef_ue3 > 0:
+    moyenne_ue3 = somme_ue3 / total_coef_ue3
+    print("Moyenne UE3 :", round(moyenne_ue3, 2))
+else:
+    print("Aucun coefficient pour UE3")
