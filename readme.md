@@ -1,0 +1,1 @@
+la version 1 : pour la version 1 il faut saisir les notes et les coefficients au clavier
