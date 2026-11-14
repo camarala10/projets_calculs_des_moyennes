@@ -1,65 +1,54 @@
 
-# Nombre de matières
-nombre_matieres = int(input("Combien de matières avez-vous ? "))
+import numpy as np
+import matplotlib.pyplot as plt
 
-# Création des dictionnaires
-notes = {}
-coefficients_ue1 = {}
-coefficients_ue2 = {}
-coefficients_ue3 = {}
+# Création de la liste des matières
+matiere = [f"R{i}" for i in range(101, 116)] + [f"SAE{i}" for i in range(11, 17)]
 
-# Saisie des matières, notes et coefficients
-for i in range(nombre_matieres):
+# Listes des coefficients des trois UE
+list_coef1 = [10, 10, 7, 7, 0, 5, 0, 6, 0, 5, 4, 2, 5, 5, 0, 20, 20, 0, 0, 0, 7]
+list_coef2 = [4, 0, 2, 8, 6, 0, 0, 0, 0, 5, 5, 2, 9, 9, 3, 0, 0, 29, 0, 0, 7]
+list_coef3 = [4, 0, 2, 0, 0, 5, 15, 6, 4, 5, 5, 2, 0, 0, 3, 0, 0, 0, 20, 20, 7]
 
-    matiere = input("Nom de la matière : ")
-    note = float(input("Moyenne : "))
-
-    coef1 = float(input("Coefficient UE1 : "))
-    coef2 = float(input("Coefficient UE2 : "))
-    coef3 = float(input("Coefficient UE3 : "))
-
-    # Ajout des informations dans les dictionnaires
-    notes[matiere] = note
-    coefficients_ue1[matiere] = coef1
-    coefficients_ue2[matiere] = coef2
-    coefficients_ue3[matiere] = coef3
-
-# Initialisation des sommes
-somme_ue1 = 0
-somme_ue2 = 0
-somme_ue3 = 0
-
-total_coef_ue1 = 0
-total_coef_ue2 = 0
-total_coef_ue3 = 0
+# Saisie des notes
+list_notes = [float(input(f"Quelle est la note pour {element} ? ")) for element in matiere]
 
 # Calcul des moyennes
-for matiere in notes:
+def calcul_moy(list_coef):
+    return round(np.average(list_notes, weights=list_coef), 3)
 
-    somme_ue1 += notes[matiere] * coefficients_ue1[matiere]
-    total_coef_ue1 += coefficients_ue1[matiere]
+moy1 = calcul_moy(list_coef1)
+moy2 = calcul_moy(list_coef2)
+moy3 = calcul_moy(list_coef3)
 
-    somme_ue2 += notes[matiere] * coefficients_ue2[matiere]
-    total_coef_ue2 += coefficients_ue2[matiere]
+print("Moyenne UE1 :", moy1)
+print("Moyenne UE2 :", moy2)
+print("Moyenne UE3 :", moy3)
 
-    somme_ue3 += notes[matiere] * coefficients_ue3[matiere]
-    total_coef_ue3 += coefficients_ue3[matiere]
+# Attribution des couleurs
+def couleur(moy):
+    if moy >= 10:
+        return "green"
+    elif 8 <= moy < 10:
+        return "orange"
+    else:
+        return "red"
 
-# Affichage des résultats
-if total_coef_ue1 > 0:
-    moyenne_ue1 = somme_ue1 / total_coef_ue1
-    print("Moyenne UE1 :", round(moyenne_ue1, 2))
-else:
-    print("Aucun coefficient pour UE1")
+couleurs = [couleur(moy1), couleur(moy2), couleur(moy3)]
 
-if total_coef_ue2 > 0:
-    moyenne_ue2 = somme_ue2 / total_coef_ue2
-    print("Moyenne UE2 :", round(moyenne_ue2, 2))
-else:
-    print("Aucun coefficient pour UE2")
+# Construction du graphique
+plt.bar(["UE1", "UE2", "UE3"], [moy1, moy2, moy3], color=couleurs, label="Moyennes")
 
-if total_coef_ue3 > 0:
-    moyenne_ue3 = somme_ue3 / total_coef_ue3
-    print("Moyenne UE3 :", round(moyenne_ue3, 2))
-else:
-    print("Aucun coefficient pour UE3")
+# Documentation du graphique
+plt.title("Moyennes des trois UE - Semestre 1")
+plt.xlabel("Unités d'enseignement")
+plt.ylabel("Moyennes sur 20")
+plt.ylim(0, 20)
+plt.legend()
+plt.grid(axis="y")
+
+plt.show()
+
+# Commentaire sur la décision du jury
+print("Les résultats affichés concernent uniquement le semestre 1.")
+print("La décision définitive du jury sera déterminée avec les moyennes annuelles.")

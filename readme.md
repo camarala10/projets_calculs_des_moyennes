@@ -1,1 +1,1 @@
-la version 3 : pour la version 3 il faut saisir les notes et les coefficients au clavier mais cette fois ci avec les dictionnaires
+la version 4 : pour la version 3 il faut saisir les notes et les coefficients au clavier mais cette fois ci avec les dic
